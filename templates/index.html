@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Assistente</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -25,7 +25,7 @@
 
     <div class="d-flex flex-column align-items-center" style="gap: 10px;">
         <!-- Botão para cima -->
-        <button type="button" class="btn btn-outline-secondary p-3">
+        <button type="button" class="btn btn-outline-secondary p-3" onclick="arrow('up')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 640" fill="currentColor">
                 <path
                     d="M342.6 81.4C330.1 68.9 309.8 68.9 297.3 81.4L137.3 241.4C124.8 253.9 124.8 274.2 137.3 286.7C149.8 299.2 170.1 299.2 182.6 286.7L288 181.3L288 552C288 569.7 302.3 584 320 584C337.7 584 352 569.7 352 552L352 181.3L457.4 286.7C469.9 299.2 490.2 299.2 502.7 286.7C515.2 274.2 515.2 253.9 502.7 241.4L342.7 81.4z" />
@@ -35,7 +35,7 @@
         <!-- Linha do meio com esquerda e direita -->
         <div class="d-flex justify-content-center" style="gap: 10px;">
             <!-- Esquerda -->
-            <button type="button" class="btn btn-outline-secondary p-3">
+            <button type="button" class="btn btn-outline-secondary p-3" onclick="arrow('left')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 640"
                     fill="currentColor"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path
@@ -49,7 +49,7 @@
             </button>
 
             <!-- Direita -->
-            <button type="button" class="btn btn-outline-secondary p-3">
+            <button type="button" class="btn btn-outline-secondary p-3" onclick="arrow('right')">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 640" fill="currentColor"
                     viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Botão para baixo -->
-        <button type="button" class="btn btn-outline-secondary p-3">
+        <button type="button" class="btn btn-outline-secondary p-3" onclick="arrow('down')">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 640 640" fill="currentColor"
                 viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                 <path
@@ -93,6 +93,19 @@
 
 
     <script>
+        function arrow(sentido) {
+            console.log(sentido)
+            fetch("/executar", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ comando: sentido })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("resposta").innerText = data.resposta;
+                });
+        }
+
         function enviar() {
             let comando = document.getElementById("comando").value;
             fetch("/executar", {
@@ -119,6 +132,11 @@
             };
             rec.start();
         }
+
+        document.addEventListener('gesturestart', function (e) {
+            e.preventDefault();
+        });
+
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"

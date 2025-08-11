@@ -90,6 +90,15 @@ comandos = {
     "espaco": espaco,
     "k": k,
     "proximo app": next_app,
+    "up": lambda: arrow("up"),
+    "cima": lambda: arrow("up"),
+    "baixo": lambda: arrow("down"),
+    "down": lambda: arrow("down"),
+    "left": lambda: arrow("left"),
+    "right": lambda: arrow("right"),
+    "direita": lambda: arrow("right"),
+    "esquerda": lambda: arrow("left"),
+   
 }
 
 # === Rota para página principal ===
@@ -103,6 +112,7 @@ def home():
 def executar():
     data = request.json
     comando = data.get("comando", "").lower().strip()
+    print(comando)
 
     # 1️⃣ Verifica comandos fixos
     for chave, acao in comandos.items():

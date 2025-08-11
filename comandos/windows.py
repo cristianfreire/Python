@@ -22,3 +22,8 @@ def k():
 
 def next_app():
     keyboard.send("alt+tab")
+
+def arrow(sentido):
+    print(sentido)
+    keyboard.send(sentido)
+

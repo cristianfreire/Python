@@ -1,17 +1,3 @@
-.controle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-}
-
-.linha {
-    display: flex;
-    gap: 10px;
-}
-
-.btn-controle {
-    width: 60px;
-    height: 60px;
-    font-size: 24px;
+html, body {
+  touch-action: manipulation; /* Evita double-tap zoom */
 }
