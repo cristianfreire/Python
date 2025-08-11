@@ -89,6 +89,7 @@ comandos = {
     "diminuir som": lambda: ajustar_volume(-0.05),
     "espaco": espaco,
     "k": k,
+    "proximo app": next_app,
 }
 
 # === Rota para página principal ===

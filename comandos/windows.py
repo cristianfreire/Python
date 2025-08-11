@@ -13,10 +13,12 @@ def ajustar_volume(delta):
     atual = volume.GetMasterVolumeLevelScalar()
     novo = max(0.0, min(atual + delta, 1.0))
     volume.SetMasterVolumeLevelScalar(novo, None)
-    falar(f"Volume ajustado para {math.floor(novo*100)} por cento")
 
 def espaco():
     keyboard.send("space")
 
 def k():
     keyboard.send("k")
+
+def next_app():
+    keyboard.send("alt+tab")

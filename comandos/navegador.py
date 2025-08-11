@@ -6,7 +6,6 @@ import time
 
 
 def abrir_navegador():
-    falar("Abrindo navegador...")
     webbrowser.open("https://www.google.com")
 
 def fechar_aba():
@@ -14,6 +13,9 @@ def fechar_aba():
 
 def proxima_aba():
     webbrowser.next()
+
+def proximo_app():
+    webbrowser.next_app()
 
 def pausar():
     falar("Pausando...")
