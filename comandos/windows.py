@@ -1,9 +1,8 @@
 import keyboard
 from falar import falar 
-import math
-import time
 from pycaw.pycaw import AudioUtilities, IAudioEndpointVolume
 from comtypes import CLSCTX_ALL
+import os
 
 
 def ajustar_volume(delta):
@@ -27,3 +26,8 @@ def arrow(sentido):
     print(sentido)
     keyboard.send(sentido)
 
+def desligar_computador():
+    falar("Desligando computador!")
+    os.system("taskkill /IM chrome.exe /F")
+    os.system("taskkill /IM explorer.exe /F")
+    os.system("shutdown /s /t 0")

@@ -1,10 +1,7 @@
 from flask import Flask, render_template, request, jsonify
 import os
-
-
 import speech_recognition as sr
 from OpenSSL import crypto
-
 
 
 app = Flask(__name__)
@@ -59,14 +56,6 @@ from comandos.navegador import *
 from comandos.windows import *
 
 
-def desligar_computador():
-    falar("Desligando computador!")
-    os.system("taskkill /IM chrome.exe /F")
-    os.system("taskkill /IM explorer.exe /F")
-    os.system("shutdown /s /t 0")
-
-
-
 
 # === Mapeamento ===
 comandos = {
@@ -106,6 +95,9 @@ comandos = {
 def home():
     return render_template("index.html")
 
+@app.route("/arrows")
+def arrows():
+    return render_template("arrows.html")
 
 # === Rota para executar comando ===
 @app.route("/executar", methods=["POST"])
@@ -125,6 +117,8 @@ def executar():
         nome_musica = comando.replace("tocar ", "", 1)
         tocar_musica(nome_musica)
         return jsonify({"resposta": f"Tocando música: {nome_musica}"})
+    elif "setas" in comando or "arrows" in comando or "controle" in comando:
+        return jsonify({"redirect": "/arrows"})
 
     return jsonify({"resposta": "Comando não reconhecido"})
 
